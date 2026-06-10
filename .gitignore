@@ -1,0 +1,28 @@
+# OS generated files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor directories and files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+
+# Node (if used in the future)
+node_modules/
+npm-debug.log*
+
+# Build output (if added in the future)
+dist/
+build/

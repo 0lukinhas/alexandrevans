@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://www.alexandrevans.com.br/sitemap.xml
+
+# Disallow admin or private routes (none currently)
+Disallow: /cgi-bin/
