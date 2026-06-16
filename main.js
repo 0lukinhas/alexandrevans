@@ -11,10 +11,28 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
+    // ── 0. THEME TOGGLER (LIGHT/DARK MODE) ──────────────────────────────────
+    const themeBtn = document.getElementById('theme-toggle');
+    const getTheme = () => localStorage.getItem('theme') || 'dark';
+    const setTheme = (theme) => {
+        document.documentElement.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+    };
+    
+    // Apply theme on load
+    setTheme(getTheme());
+    
+    if (themeBtn) {
+        themeBtn.addEventListener('click', () => {
+            const nextTheme = getTheme() === 'light' ? 'dark' : 'light';
+            setTheme(nextTheme);
+        });
+    }
+
     // ── 1. HEADER SCROLL ────────────────────────────────────────────────────
     const header = document.getElementById('header');
     const onScroll = () => {
-        header.classList.toggle('scrolled', window.scrollY > 40);
+        if (header) header.classList.toggle('scrolled', window.scrollY > 40);
     };
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
@@ -129,6 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const name        = document.getElementById('form-name').value.trim();
             const phone       = document.getElementById('form-phone').value.trim();
             const service     = document.getElementById('form-service').value;
+            const contactSel  = document.getElementById('form-contact').value;
             const origin      = document.getElementById('form-origin').value.trim() || '—';
             const destination = document.getElementById('form-destination').value.trim() || '—';
             const date        = document.getElementById('form-date').value;
@@ -150,9 +169,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 dateFormatted = `${d}/${m}/${y}`;
             }
 
-            const text = `Olá, Alexandre Vans! 👋
-
-*Solicitação de Orçamento*
+            const text = `Olá! Acessei o site da Alexandre Vans e gostaria de solicitar um orçamento. Seguem os dados do meu pedido:
 
 • *Nome:* ${name}
 • *Contato:* ${phone}
@@ -164,9 +181,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
 *Observações:* ${message}
 
-_(Mensagem enviada pelo site)_`;
+Poderiam me ajudar com a cotação? Obrigado!`;
 
-            const url = `https://api.whatsapp.com/send?phone=5511997964466&text=${encodeURIComponent(text)}`;
+            // Contact routing
+            let targetPhone = '';
+            if (contactSel === 'mineiro') {
+                targetPhone = '5511984451740';
+            } else if (contactSel === 'donizete') {
+                targetPhone = '5511971391639';
+            } else {
+                // Random distribution (50/50 balance)
+                targetPhone = Math.random() < 0.5 ? '5511984451740' : '5511971391639';
+            }
+
+            const url = `https://api.whatsapp.com/send?phone=${targetPhone}&text=${encodeURIComponent(text)}`;
             window.open(url, '_blank');
         });
     }
@@ -283,5 +311,64 @@ _(Mensagem enviada pelo site)_`;
     }, { threshold: 0.5 });
 
     statNumbers.forEach(el => counterObserver.observe(el));
+
+    // ── 11. WHATSAPP DROPDOWN & FLOATING MENU TOGGLES ────────────────────────
+    const dropdownToggle = document.getElementById('whatsapp-dropdown-toggle');
+    const dropdownMenu   = document.getElementById('whatsapp-dropdown');
+    
+    if (dropdownToggle && dropdownMenu) {
+        dropdownToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            dropdownMenu.classList.toggle('show');
+        });
+        
+        // Close dropdown when clicking outside
+        document.addEventListener('click', () => {
+            dropdownMenu.classList.remove('show');
+        });
+    }
+    
+    const fabBtn  = document.getElementById('fab-whatsapp-btn');
+    const fabMenu = document.getElementById('fab-menu');
+    
+    if (fabBtn && fabMenu) {
+        fabBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const isOpen = fabMenu.classList.contains('open');
+            fabMenu.classList.toggle('open');
+            fabBtn.setAttribute('aria-expanded', !isOpen);
+        });
+        
+        // Close FAB menu when clicking outside
+        document.addEventListener('click', () => {
+            if (fabMenu) fabMenu.classList.remove('open');
+            if (fabBtn) fabBtn.setAttribute('aria-expanded', 'false');
+        });
+    }
+
+    // ── 12. 4-SECOND CONTACT POPUP ───────────────────────────────────────────
+    const popup = document.getElementById('contact-popup');
+    const popupClose = document.getElementById('popup-close');
+    const popupOverlay = document.getElementById('popup-overlay');
+    
+    if (popup && popupClose && popupOverlay) {
+        // Show popup after 4 seconds
+        setTimeout(() => {
+            // Only show if the user hasn't closed it in this session
+            if (!sessionStorage.getItem('popup_closed')) {
+                popup.classList.add('visible');
+                popup.setAttribute('aria-hidden', 'false');
+            }
+        }, 4000);
+        
+        const closePopup = () => {
+            popup.classList.remove('visible');
+            popup.setAttribute('aria-hidden', 'true');
+            sessionStorage.setItem('popup_closed', 'true');
+        };
+        
+        popupClose.addEventListener('click', closePopup);
+        popupOverlay.addEventListener('click', closePopup);
+    }
 
 });

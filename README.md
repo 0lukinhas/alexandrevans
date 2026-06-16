@@ -84,8 +84,8 @@ python -m http.server 8080
 
 ## 📞 Contato
 
-- **WhatsApp:** (11) 99796-4466
-- **E-mail:** andervans.emtu@gmail.com
+- **WhatsApp:** Mineiro (11) 98445-1740 | Donizete (11) 97139-1639
+- **E-mail:** contatoalexandrevans@gmail.com
 - **Localização:** Itatiba — SP, Brasil
 
 ---
