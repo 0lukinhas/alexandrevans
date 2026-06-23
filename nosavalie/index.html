@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avaliar Alexandre Vans - Google</title>
+    <!-- Instant Redirect to homepage anchor -->
+    <meta http-equiv="refresh" content="0; url=../index.html#google-avaliacao">
+    
+    <!-- Google Fonts & Stylesheets -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg: #080c14;
+            --text: #f1f5f9;
+            --text-muted: #94a3b8;
+            --primary: #1c399d;
+            --primary-light: #3052d4;
+            --font: 'Outfit', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: var(--font);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+        }
+
+        .redirect-container {
+            max-width: 480px;
+            padding: 40px 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logo-img {
+            height: 56px;
+            width: auto;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        p {
+            font-size: 15px;
+            color: var(--text-muted);
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(255, 255, 255, 0.08);
+            border-radius: 50%;
+            border-top-color: var(--primary-light);
+            animation: spin 1s ease-in-out infinite;
+            margin: 20px 0;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .btn-manual {
+            background: var(--primary);
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            text-decoration: none;
+            transition: 0.3s ease;
+            box-shadow: 0 4px 12px rgba(28, 57, 157, 0.2);
+            margin-top: 10px;
+        }
+
+        .btn-manual:hover {
+            background: var(--primary-light);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="redirect-container">
+        <!-- Logo -->
+        <img src="../images/logo.png" alt="Alexandre Vans Logo" class="logo-img">
+        
+        <!-- Loading Spinner -->
+        <div class="spinner"></div>
+        
+        <h1>Abrindo nosso site...</h1>
+        <p>Aguarde um instante. Estamos levando você para a nossa seção de avaliações oficial.</p>
+        
+        <!-- Manual Link fallback -->
+        <a href="../index.html#google-avaliacao" class="btn-manual">
+            Clique aqui se não for redirecionado
+        </a>
+    </div>
+
+    <!-- JS Fallback Redirection -->
+    <script>
+        setTimeout(function() {
+            window.location.href = "../index.html#google-avaliacao";
+        }, 100);
+    </script>
+</body>
+</html>
