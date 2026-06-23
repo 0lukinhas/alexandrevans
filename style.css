@@ -7,12 +7,12 @@
     --bg-card: #111827;
     --border: rgba(255,255,255,0.07);
     --border-hover: rgba(255,255,255,0.15);
-    --primary: #1c399d;
-    --primary-light: #3052d4;
-    --primary-dark: #12276e;
-    --accent: #e30613;
-    --accent-light: #ff1f2d;
-    --accent-dark: #ad0009;
+    --primary: #e30613; /* Red instead of blue for higher contrast */
+    --primary-light: #ff1f2d;
+    --primary-dark: #ad0009;
+    --accent: #1c399d; /* Blue instead of red */
+    --accent-light: #3052d4;
+    --accent-dark: #12276e;
     --green: #22c55e;
     --green-dark: #16a34a;
     --text: #f1f5f9;
@@ -25,7 +25,7 @@
     --header-h: 72px;
     --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
     --shadow: 0 8px 32px rgba(0,0,0,0.4);
-    --glow-primary: 0 0 24px rgba(28,57,157,0.2);
+    --glow-primary: 0 0 24px rgba(227,6,19,0.2); /* Red glow */
     --star-color: #f59e0b;
 }
 
@@ -685,6 +685,10 @@ input, select, textarea, button { font-family: inherit; }
     grid-template-columns: 0.9fr 1.1fr;
     gap: 64px;
     align-items: start;
+}
+.contact-info,
+.contact-form {
+    min-width: 0;
 }
 .contact-info > p {
     color: var(--text-muted);
